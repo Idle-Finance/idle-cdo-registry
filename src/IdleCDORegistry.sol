@@ -12,6 +12,8 @@ interface IIdleCDO {
   function token() external view returns (address);
 }
 
+error Invalid();
+
 contract IdleCDORegistry is IIdleRegistry, Ownable {
   mapping(address => bool) public isValidCdo;
 
@@ -32,7 +34,9 @@ contract IdleCDORegistry is IIdleRegistry, Ownable {
   }
 
   function toggleCDO(address _cdo, bool _valid) external onlyOwner {
-    require(_cdo != address(0), "Invalid cdo");
+    if (_cdo == address(0)) {
+      revert Invalid();
+    }
     isValidCdo[_cdo] = _valid;
   }
 }
