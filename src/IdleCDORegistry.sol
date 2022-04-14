@@ -3,18 +3,13 @@ pragma solidity 0.8.13;
 
 import "openzeppelin-contracts/access/Ownable.sol";
 
-interface IIdleRegistry {
-  function idleCdoToToken(address idleCdo) external view returns (address);
-  function isValidCdo(address idleCdo) external view returns (bool);
-}
-
 interface IIdleCDO {
   function token() external view returns (address);
 }
 
 error Invalid();
 
-contract IdleCDORegistry is IIdleRegistry, Ownable {
+contract IdleCDORegistry is Ownable {
   mapping(address => bool) public isValidCdo;
 
   constructor(address[] memory _cdos) {
@@ -24,12 +19,6 @@ contract IdleCDORegistry is IIdleRegistry, Ownable {
       unchecked {
         ++i;
       }
-    }
-  }
-
-  function idleCdoToToken(address _cdo) external view returns (address _underlying) {
-    if (isValidCdo[_cdo]) {
-      _underlying = IIdleCDO(_cdo).token();
     }
   }
 

@@ -48,9 +48,4 @@ contract IdleCDORegistryTest is BaseTest {
     vm.expectRevert(Invalid.selector);
     reg.toggleCDO(address(0), true);
   }
-  function testIdleCdoToToken() public {
-    assertEq(reg.idleCdoToToken(address(cdo1)), address(1));
-    assertEq(reg.idleCdoToToken(address(cdo2)), address(2));
-    assertEq(reg.idleCdoToToken(address(3)), address(0));
-  }
 }
