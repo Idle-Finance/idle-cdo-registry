@@ -37,6 +37,17 @@ contract IdleCDORegistryTest is BaseTest {
     reg.toggleCDO(address(3), false);
     assertTrue(!reg.isValidCdo(address(3)));
   }
+  function testToggleCdoNonOwner() public {
+    assertTrue(!reg.isValidCdo(address(3)));
+    vm.prank(address(0));
+    vm.expectRevert("Ownable: caller is not the owner");
+    reg.toggleCDO(address(3), true);
+  }
+  function testToggleCdoInvalid() public {
+    assertTrue(!reg.isValidCdo(address(3)));
+    vm.expectRevert(Invalid.selector);
+    reg.toggleCDO(address(0), true);
+  }
   function testIdleCdoToToken() public {
     assertEq(reg.idleCdoToToken(address(cdo1)), address(1));
     assertEq(reg.idleCdoToToken(address(cdo2)), address(2));
