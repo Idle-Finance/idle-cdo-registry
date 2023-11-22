@@ -15,7 +15,8 @@
     "solhint": "yarn solhint:check --fix",
     "solhint:check": "solhint --config ./.solhint.json \"src/**/*.sol\"",
     "deploy": "node --experimental-json-modules scripts/deploy.js",
-    "deploy-fork": "export RPC_URL=http://127.0.0.1:8545 && node --experimental-json-modules scripts/deploy.js"
+    "deploy-fork": "export RPC_URL=http://127.0.0.1:8545 && node --experimental-json-modules scripts/deploy.js",
+    "deploy-op": "export RPC_URL=$OPTIMISM_RPC_URL && node --experimental-json-modules scripts/deploy.js"
   },
   "type": "module",
   "devDependencies": {
